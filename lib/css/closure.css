@@ -1,0 +1,184 @@
+body {
+	background-color: #e4f0fb;
+	font-size: 20px;
+}
+#sidebar {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	width: 320px;
+	overflow: auto;
+	background-color: #1b2024;
+	color: #8c97a3;
+	text-align: center;
+}
+#sidebar h3 {
+	margin: 0.5em 0;
+	padding: 0.5em;
+	background-color: #151b22;
+	font-size: 0.8em;
+	font-family: sans-serif;
+}
+#nodes {
+	margin: 0;
+	padding: 0.5em 0;
+	list-style-type: none;
+	text-align: left;
+	font-family: monospace;
+}
+#nodes li {
+	padding: 0.5em 1em;
+}
+#sidebar button {
+	margin: 0.1em 0;
+	border: 1px solid #31383e;
+	border-radius: 0.2em;
+	padding: 0.3em 0.6em;
+	outline: none;
+	background-color: #1b2024;
+	color: #8c97a3;
+	font-size: 0.8em;
+}
+#sidebar .remove {
+	float: right;
+	padding: 0.1em 0.2em;
+}
+#sidebar button:hover, #sidebar button:focus {
+	background-color: #31383e;
+}
+#sidebar button:active {
+	border-color: #1b2024;
+	background-color: #151b22;
+	color: #444e57;
+}
+#sidebar input {
+	width: 4em;
+	margin: 0 0.1em;
+	border-width: 0 0 1px 0;
+	border-style: solid;
+	border-color: #444e57;
+	padding: 0.1em 0.2em;
+	background-color: #151b22;
+	color: #8c97a3;
+	font-size: 1em;
+	font-family: monospace;
+}
+#sidebar input:hover, #sidebar input:focus {
+	border-color: #8c97a3;
+	color: #fff;
+}
+#game {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 320px;
+	background-size: 1em 1em, 1em 1em;
+	background-image: -webkit-linear-gradient(0deg, #c2d0de, #c2d0de 2px, transparent
+			2px, transparent), -webkit-linear-gradient(90deg, #c2d0de, #c2d0de 2px,
+			transparent 2px, transparent);
+	background-image: -moz-linear-gradient(0deg, #c2d0de, #c2d0de 2px, transparent
+			2px, transparent), -moz-linear-gradient(90deg, #c2d0de, #c2d0de 2px,
+			transparent 2px, transparent);
+	background-image: linear-gradient(0deg, #c2d0de, #c2d0de 2px, transparent 2px,
+			transparent), linear-gradient(90deg, #c2d0de, #c2d0de 2px, transparent
+			2px, transparent);
+	-webkit-transition: #000 font-size 400ms;
+	-moz-transition: #000 font-size 400ms;
+	transition: #000 font-size 400ms;
+}
+#game.active {
+	-webkit-transition: background-position 400ms, font-size 400ms;
+	-moz-transition: background-position 400ms, font-size 400ms;
+	transition: background-position 400ms, font-size 400ms;
+}
+.grid {
+	position: absolute;
+}
+.grid, .node {
+	-webkit-transition: top 400ms, left 400ms;
+	-o-transition: top 400ms, left 400ms;
+	-moz-transition: top 400ms, left 400ms;
+	transition: top 400ms, left 400ms;
+}
+.node, .node span {
+	display: block;
+	position: absolute;
+}
+.node.grasp::after, .node.grasp .edge {
+	display: none;
+}
+.node::after {
+	display: block;
+	position: relative;
+	top: -8px;
+	left: -8px;
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	content: '';
+	background-color: #138bff;
+	z-index: 1;
+}
+.node.active::after {
+	background-color: #af890b;
+	z-index: 2;
+}
+.edge, .in, .out {
+	top: -6px;
+	height: 6px;
+	border-top: 3px solid #e4f0fb;
+	border-bottom: 3px dotted #e4f0fb;
+	background-color: #8c97a3;
+	-webkit-transform-origin: left;
+	-o-transform-origin: left;
+	-ms-transform-origin: left;
+	-moz-transform-origin: left;
+	transform-origin: left;
+	-webkit-transition: -webkit-transform 400ms, width 400ms;
+	-o-transition: -o-transform 400ms, width 400ms;
+	-moz-transition: -moz-transform 400ms, width 400ms;
+	transition: transform 400ms, width 400ms;
+}
+.node.grasp .edge.active {
+	display: block;
+	top: -9px;
+	height: 12px;
+	border-top: 3px solid #ba440b;
+	background-color: transparent;
+}
+.edge:hover {
+	background-color: #ad816b;
+}
+.edge:active, .edge.active {
+	background-color: #d4581c;
+}
+.edge span {
+	top: 5px;
+	height: 0;
+	width: 80px;
+	border-top: 2px dashed #1e354a;
+	border-bottom: 0;
+	background-color: transparent;
+}
+.edge .out {
+	border-top: 2px dashed #8c97a3;
+}
+.right {
+	right: 0;
+	-webkit-transform-origin: right;
+	-o-transform-origin: right;
+	-ms-transform-origin: right;
+	-moz-transform-origin: right;
+	transform-origin: right;
+}
+.grasp .edge::after {
+	position: absolute;
+	top: -1em;
+	left: 50%;
+	margin-left: -0.42em;
+	content: '\2193';
+	color: #1e354a;
+	font-size: 80px;
+}

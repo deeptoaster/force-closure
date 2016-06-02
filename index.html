@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>PCWF</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" type="text/css" href="lib/css/closure.css" />
+        <script type="text/javascript" src="lib/js/jquery.min.js"></script>
+        <script type="text/javascript" src="lib/js/closure.js"></script>
+        <script type="text/javascript" src="lib/js/closurepresenter.js"></script>
+        <script type="text/javascript">// <![CDATA[
+            $(function() {
+				var presenter = new ClosurePresenter();
+                var closure = new Closure(presenter);
+
+                closure.init();
+            });
+        // ]]></script>
+    </head>
+    <body>
+        <div class="container">
+            <div id="sidebar">
+                <h3>Friction</h3>
+                <p><var>&mu;</var> = tan(<input type="number" id="mu"
+                        value="30" />&deg;)</p>
+                <h3>Vertices</h3>
+                <ul id="nodes"></ul>
+                <div>
+                    <button id="add">Add Vertex</button>
+                </div>
+            </div>
+            <div id="game"></div>
+        </div>
+    </body>
+</html>
