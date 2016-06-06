@@ -20,6 +20,11 @@ body {
 	background-color: #151b22;
 	font-size: 0.8em;
 }
+#sidebar .note {
+	padding: 1em;
+	text-align: left;
+	font-style: italic;
+}
 #nodes {
 	margin: 0;
 	padding: 0.5em 0;
@@ -75,15 +80,15 @@ body {
 	bottom: 0;
 	left: 320px;
 	background-size: 1em 1em, 1em 1em;
-	background-image: -webkit-linear-gradient(0deg, #c2d0de, #c2d0de 2px, transparent
-			2px, transparent), -webkit-linear-gradient(90deg, #c2d0de, #c2d0de 2px,
+	background-image: -webkit-linear-gradient(0deg, #c2d0de, #c2d0de 2px,
+			transparent 2px, transparent), -webkit-linear-gradient(90deg,
+			#c2d0de, #c2d0de 2px, transparent 2px, transparent);
+	background-image: -moz-linear-gradient(0deg, #c2d0de, #c2d0de 2px,
+			transparent 2px, transparent), -moz-linear-gradient(90deg,
+			#c2d0de, #c2d0de 2px, transparent 2px, transparent);
+	background-image: linear-gradient(0deg, #c2d0de, #c2d0de 2px, transparent
+			2px, transparent), linear-gradient(90deg, #c2d0de, #c2d0de 2px,
 			transparent 2px, transparent);
-	background-image: -moz-linear-gradient(0deg, #c2d0de, #c2d0de 2px, transparent
-			2px, transparent), -moz-linear-gradient(90deg, #c2d0de, #c2d0de 2px,
-			transparent 2px, transparent);
-	background-image: linear-gradient(0deg, #c2d0de, #c2d0de 2px, transparent 2px,
-			transparent), linear-gradient(90deg, #c2d0de, #c2d0de 2px, transparent
-			2px, transparent);
 	-webkit-transition: #000 font-size 400ms;
 	-moz-transition: #000 font-size 400ms;
 	transition: #000 font-size 400ms;
@@ -102,11 +107,11 @@ body {
 	-moz-transition: top 400ms, left 400ms;
 	transition: top 400ms, left 400ms;
 }
-.node, .edge, .edge span, .box {
+.node, .node span, .graph span {
 	display: block;
 	position: absolute;
 }
-.node.grasp::after, .node.grasp .edge {
+.node.grasp::after, .node.grasp .edge, .result {
 	display: none;
 }
 .node::after {
@@ -196,25 +201,53 @@ body {
 	color: #1e354a;
 	font-size: 80px;
 }
-.instructions {
-	padding: 0 1em;
-	text-align: left;
-	font-style: italic;
-}
 .graph {
-	display: none;
 	position: relative;
 	width: 240px;
 	height: 240px;
-	margin: 1em auto;
+	margin: 1em auto 2em auto;
 	border-width: 0 0 2px 2px;
 	border-style: solid;
 	border-color: #8c97a3;
 }
+.graph .axis {
+	top: 100%;
+	width: 100%;
+	padding: 0.4em 0;
+	text-align: right;
+}
+.graph .axis::before {
+	position: absolute;
+	left: -0.4em;
+	content: '0';
+}
+.graph .axis::after {
+	position: absolute;
+	right: 50%;
+	margin-right: -0.4em;
+}
+.axis.y {
+	-webkit-transform-origin: -1em 0.8em;
+	-o-transform-origin: -1em 0.8em;
+	-ms-transform-origin: -1em 0.8em;
+	-moz-transform-origin: -1em 0.8em;
+	transform-origin: -1em 0.8em;
+	-webkit-transform: rotate(-90deg);
+	-o-transform: rotate(-90deg);
+	-ms-transform: rotate(-90deg);
+	-moz-transform: rotate(-90deg);
+	transform: rotate(-90deg);
+}
+.axis.x::after {
+	content: 'E1';
+}
+.axis.y::after {
+	content: 'E2';
+}
 #output.active .instructions {
 	display: none;
 }
-#output.active .graph {
+#output.active .result {
 	display: block;
 }
 .graph .edge {
