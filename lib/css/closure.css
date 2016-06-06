@@ -1,6 +1,7 @@
 body {
 	background-color: #e4f0fb;
 	font-size: 20px;
+	font-family: sans-serif;
 }
 #sidebar {
 	position: fixed;
@@ -18,7 +19,6 @@ body {
 	padding: 0.5em;
 	background-color: #151b22;
 	font-size: 0.8em;
-	font-family: sans-serif;
 }
 #nodes {
 	margin: 0;
@@ -102,7 +102,7 @@ body {
 	-moz-transition: top 400ms, left 400ms;
 	transition: top 400ms, left 400ms;
 }
-.node, .node span {
+.node, .edge, .edge span, .box {
 	display: block;
 	position: absolute;
 }
@@ -148,10 +148,10 @@ body {
 	border-top: 3px solid #ba440b;
 	background-color: transparent;
 }
-.edge:hover {
+.grid .edge:hover {
 	background-color: #ad816b;
 }
-.edge:active, .edge.active {
+.grid .edge:active, .grid .edge.active {
 	background-color: #d4581c;
 }
 .edge span {
@@ -165,13 +165,27 @@ body {
 .edge .out {
 	border-top: 2px dashed #8c97a3;
 }
-.right {
+.edge .right {
 	right: 0;
 	-webkit-transform-origin: right;
 	-o-transform-origin: right;
 	-ms-transform-origin: right;
 	-moz-transform-origin: right;
 	transform-origin: right;
+}
+.grasp .edge::before {
+	position: absolute;
+	top: -1em;
+	color: #1e354a;
+	font-size: 20px;
+}
+.grasp.left .edge::before {
+	left: -2em;
+	content: 'E1';
+}
+.grasp.right .edge::before {
+	right: -2em;
+	content: 'E2';
 }
 .grasp .edge::after {
 	position: absolute;
@@ -181,4 +195,50 @@ body {
 	content: '\2193';
 	color: #1e354a;
 	font-size: 80px;
+}
+.instructions {
+	padding: 0 1em;
+	text-align: left;
+	font-style: italic;
+}
+.graph {
+	display: none;
+	position: relative;
+	width: 240px;
+	height: 240px;
+	margin: 1em auto;
+	border-width: 0 0 2px 2px;
+	border-style: solid;
+	border-color: #8c97a3;
+}
+#output.active .instructions {
+	display: none;
+}
+#output.active .graph {
+	display: block;
+}
+.graph .edge {
+	margin-top: -1px;
+	height: 0;
+	border-top: 2px dashed #8c97a3;
+	border-bottom: 0;
+	background-color: transparent;
+}
+.box {
+	border: 3px solid #8c97a3;
+}
+@media screen and (max-width: 960px) {
+	body {
+		font-size: 15px;
+	}
+	#sidebar {
+		width: 240px;
+	}
+	#game {
+		left: 240px;
+	}
+	.graph {
+		width: 180px;
+		height: 180px;
+	}
 }
