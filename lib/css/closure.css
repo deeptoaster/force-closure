@@ -101,9 +101,8 @@ body {
 .grid {
 	position: absolute;
 }
-.grid, .node {
+.grid, .node:not(.grasp) {
 	-webkit-transition: top 400ms, left 400ms;
-	-o-transition: top 400ms, left 400ms;
 	-moz-transition: top 400ms, left 400ms;
 	transition: top 400ms, left 400ms;
 }
@@ -142,7 +141,6 @@ body {
 	-moz-transform-origin: left;
 	transform-origin: left;
 	-webkit-transition: -webkit-transform 400ms, width 400ms;
-	-o-transition: -o-transform 400ms, width 400ms;
 	-moz-transition: -moz-transform 400ms, width 400ms;
 	transition: transform 400ms, width 400ms;
 }
