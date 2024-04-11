@@ -1,68 +1,69 @@
-<!DOCTYPE html>
+<!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-	<head>
-		<title>PCWF</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<link rel="stylesheet" type="text/css" href="bin/css/closure.css" />
-		<script type="text/javascript" src="bin/js/jquery.min.js"></script>
-		<script type="text/javascript" src="bin/js/closure.js"></script>
-		<script type="text/javascript" src="bin/js/closurepresenter.js"></script>
-		<script type="text/javascript">// <![CDATA[
-			$(function() {
-				var presenter = new ClosurePresenter();
-				var closure = new Closure(presenter);
+  <head>
+    <title>PCWF</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="bin/css/closure.css" />
+    <script type="text/javascript" src="bin/js/jquery.min.js"></script>
+    <script type="text/javascript" src="bin/js/closure.js"></script>
+    <script type="text/javascript" src="bin/js/closurepresenter.js"></script>
+    <script type="text/javascript">
+      // <![CDATA[
+      $(function () {
+        var presenter = new ClosurePresenter();
+        var closure = new Closure(presenter);
 
-				closure.init();
-			});
-		// ]]></script>
-	</head>
-	<body>
-		<div class="container">
-			<div id="sidebar">
-				<h3>Friction</h3>
-				<p><var>&mu;</var> = tan(<input type="number" id="mu"
-						value="30" />&deg;)</p>
-				<h3>Vertices</h3>
-				<ul id="nodes"></ul>
-				<div>
-					<button id="add">Add Vertex</button>
-				</div>
-				<h3>Output</h3>
-				<div id="output">
-					<p class="instructions note">
-						Select two edges to find the maximal independent
-						contact regions for force-closure grasps.
-					</p>
-					<p class="message note">
-						No force-closure grasps found.
-					</p>
-					<div class="result graph">
-						<span class="axis x"></span>
-						<span class="axis y"></span>
-					</div>
-					<p class="result note">Force-closure restrictions:</p>
-					<p id="r0" class="result">
-						<var>E2</var> &gt; <span class="m"></span> &times;
-						<var>E1</var> <span class="op"></span>
-						<span class="b"></span>
-					</p>
-					<p id="r1" class="result">
-						<var>E1</var> &gt; <span class="m"></span> &times;
-						<var>E2</var> <span class="op"></span>
-						<span class="b"></span>
-					</p>
-					<p class="result note">Maximal independent regions:</p>
-					<p id="i0" class="result">
-						<span class="s"></span> &lt; <var>E1</var> &lt;
-						<span class="t"></span>
-					</p>
-					<p id="i1" class="result">
-						<span class="s"></span> &lt; <var>E2</var> &lt;
-						<span class="t"></span>
-					</p>
-				</div>
-			</div>
-			<div id="game"></div>
-		</div>
-	</body>
+        closure.init();
+      });
+      // ]]>
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div id="sidebar">
+        <h3>Friction</h3>
+        <p>
+          <var>&mu;</var> = tan(<input type="number" id="mu" value="30" />&deg;)
+        </p>
+        <h3>Vertices</h3>
+        <ul id="nodes"></ul>
+        <div>
+          <button id="add">Add Vertex</button>
+        </div>
+        <h3>Output</h3>
+        <div id="output">
+          <p class="instructions note">
+            Select two edges to find the maximal independent contact regions for
+            force-closure grasps.
+          </p>
+          <p class="message note">No force-closure grasps found.</p>
+          <div class="result graph">
+            <span class="axis x"></span>
+            <span class="axis y"></span>
+          </div>
+          <p class="result note">Force-closure restrictions:</p>
+          <p id="r0" class="result">
+            <var>E2</var> &gt; <span class="m"></span> &times; <var>E1</var>
+            <span class="op"></span>
+            <span class="b"></span>
+          </p>
+          <p id="r1" class="result">
+            <var>E1</var> &gt; <span class="m"></span> &times; <var>E2</var>
+            <span class="op"></span>
+            <span class="b"></span>
+          </p>
+          <p class="result note">Maximal independent regions:</p>
+          <p id="i0" class="result">
+            <span class="s"></span> &lt; <var>E1</var> &lt;
+            <span class="t"></span>
+          </p>
+          <p id="i1" class="result">
+            <span class="s"></span> &lt; <var>E2</var> &lt;
+            <span class="t"></span>
+          </p>
+        </div>
+      </div>
+      <div id="game"></div>
+    </div>
+  </body>
 </html>

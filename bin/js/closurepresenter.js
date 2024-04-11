@@ -8,15 +8,16 @@ function ClosurePresenter() {
   var left;
   var $grid;
 
-  this.center = function(init) {
+  this.center = function (init) {
     var h = $('#game').height();
     var w = $('#game').width();
-    var fs = 1 / Math.max((top - bottom) / (h * padding), (right - left) /
-        (w * padding));
+    var fs =
+      1 /
+      Math.max((top - bottom) / (h * padding), (right - left) / (w * padding));
 
     var css = {
-      top: h / 2 + (top + bottom) * fs / 2 + 'px',
-      left: w / 2 - (right + left) * fs / 2 + 'px'
+      top: h / 2 + ((top + bottom) * fs) / 2 + 'px',
+      left: w / 2 - ((right + left) * fs) / 2 + 'px'
     };
 
     $('#game').css({
@@ -27,30 +28,34 @@ function ClosurePresenter() {
     $grid.css(css);
 
     if (init) {
-      setTimeout(function() {
+      setTimeout(function () {
         $('#game').addClass('active');
       }, 400);
     }
   };
 
-  this.updateEdge = function(n0, side) {
-		n0.$node.children().css({
-      width: n0.width + 'em',
-      transform: 'rotate(' + -n0.theta + 'rad)'
-    }).children().css('transform', function() {
-      var t = 90 + ($(this).hasClass('in')
-				? -self.model.getMu()
-				: self.model.getMu());
+  this.updateEdge = function (n0, side) {
+    n0.$node
+      .children()
+      .css({
+        width: n0.width + 'em',
+        transform: 'rotate(' + -n0.theta + 'rad)'
+      })
+      .children()
+      .css('transform', function () {
+        var t =
+          90 +
+          ($(this).hasClass('in') ? -self.model.getMu() : self.model.getMu());
 
-      return 'rotate(' + ($(this).hasClass('left') ? t : -t) + 'deg)';
-    });
+        return 'rotate(' + ($(this).hasClass('left') ? t : -t) + 'deg)';
+      });
 
     if (side) {
       n0.$node.addClass(side);
     }
   };
 
-  this.toggleGrasp = function(mode) {
+  this.toggleGrasp = function (mode) {
     var $e = $('.node.grasp .edge, #output').removeClass('active error');
 
     if (mode == -1) {
@@ -58,40 +63,40 @@ function ClosurePresenter() {
     } else if (mode) {
       $e.addClass('active');
     }
-  }
+  };
 
-  this.updateGraph = function(m, b0, b1, w0, w1, s0, t0, s1, t1) {
+  this.updateGraph = function (m, b0, b1, w0, w1, s0, t0, s1, t1) {
     var x0 = 0;
     var y0 = 0;
     var x1 = 0;
     var y1 = 0;
     var w = $('.graph').width();
     var h = $('.graph').height();
-    var max = Math.max(w0, w1)
+    var max = Math.max(w0, w1);
 
     if (b0 < 0) {
-      x0 = -b0 / m * w / max;
+      x0 = ((-b0 / m) * w) / max;
     } else {
-      y0 = b0 * h / max;
+      y0 = (b0 * h) / max;
     }
 
     if (b1 < 0) {
-      y1 = -b1 / m * w / max;
+      y1 = ((-b1 / m) * w) / max;
     } else {
-      x1 = b1 * h / max;
+      x1 = (b1 * h) / max;
     }
 
     var t = Math.atan(m);
-    var wp = w0 * w / max;
-    var hp = w1 * h / max;
+    var wp = (w0 * w) / max;
+    var hp = (w1 * h) / max;
     var d0 = Math.min((wp - x0) / Math.cos(t), (hp - y0) / Math.sin(t));
     var d1 = Math.min((wp - x1) / Math.sin(t), (hp - y1) / Math.cos(t));
 
     $('.graph .edge, .graph .box').remove();
 
-    var e = $('.graph').append(
-			'<span class="edge" /><span class="edge" /><span class="box" />'
-    ).children('.edge');
+    var e = $('.graph')
+      .append('<span class="edge" /><span class="edge" /><span class="box" />')
+      .children('.edge');
 
     e.first().css({
       top: h - y0,
@@ -108,10 +113,10 @@ function ClosurePresenter() {
     });
 
     $('.graph .box').css({
-      top: h - s1 * h / max - 1,
-      right: w - s0 * w / max - 1,
-      bottom: t1 * h / max - 1,
-      left: t0 * w / max - 1,
+      top: h - (s1 * h) / max - 1,
+      right: w - (s0 * w) / max - 1,
+      bottom: (t1 * h) / max - 1,
+      left: (t0 * w) / max - 1
     });
 
     $('.graph .axis').text(Math.round(max * 10) / 10);
@@ -137,28 +142,34 @@ function ClosurePresenter() {
     $('#i0 .t').text(Math.round(s0 * 100) / 100);
     $('#i1 .s').text(Math.round(t1 * 100) / 100);
     $('#i1 .t').text(Math.round(s1 * 100) / 100);
-  }
+  };
 
-  this.createNode = function(node, i, grasp) {
+  this.createNode = function (node, i, grasp) {
     node.$node = $('<span class="node"><span class="edge" /></span>');
 
     if (grasp) {
-      node.$node.addClass('grasp').children().append(
-				'<span class="left in" /><span class="left out" />' +
-						'<span class="right in" /><span class="right out" />'
-			);
+      node.$node
+        .addClass('grasp')
+        .children()
+        .append(
+          '<span class="left in" /><span class="left out" />' +
+            '<span class="right in" /><span class="right out" />'
+        );
     }
 
     this.updateNode(node);
-    node.$node.appendTo($grid)
+    node.$node.appendTo($grid);
     node.$node[0].node = node;
 
     if (!grasp) {
       node.$input = $(
-				'<li class="vertex"><button class="remove">&times;</button> (' +
-						'<input type="text" class="x" value="' + node.x	+
-						'" />, <input type="text" class="y" value="' + node.y +	'" />)</li>'
-			);
+        '<li class="vertex"><button class="remove">&times;</button> (' +
+          '<input type="text" class="x" value="' +
+          node.x +
+          '" />, <input type="text" class="y" value="' +
+          node.y +
+          '" />)</li>'
+      );
 
       node.$input[0].node = node;
 
@@ -170,12 +181,12 @@ function ClosurePresenter() {
     }
   };
 
-  this.destroyNode = function(node) {
+  this.destroyNode = function (node) {
     node.$input.remove();
     node.$node.remove();
   };
 
-  this.updateNode = function(node) {
+  this.updateNode = function (node) {
     top = Math.max(top, node.y);
     right = Math.max(right, node.x);
     bottom = Math.min(bottom, node.y);
@@ -187,66 +198,71 @@ function ClosurePresenter() {
     });
   };
 
-  this.init = function() {
-		top = -Infinity;
-		right = -Infinity;
-		bottom = Infinity;
-		left = Infinity;
+  this.init = function () {
+    top = -Infinity;
+    right = -Infinity;
+    bottom = Infinity;
+    left = Infinity;
 
-    $grid = $('<div class="grid" />').appendTo('#game').on(
-			'click',
-      '.node:not(.grasp) .edge',
-      function() {
-				var node = $(this).parent()[0].node;
+    $grid = $('<div class="grid" />')
+      .appendTo('#game')
+      .on('click', '.node:not(.grasp) .edge', function () {
+        var node = $(this).parent()[0].node;
 
-				if ($(this).hasClass('active')) {
-					self.model.removeGrasp(node);
-					$(this).removeClass('active');
-				} else {
-					self.model.addGrasp(node);
-					$(this).addClass('active');
-				}
-			}
-		);
+        if ($(this).hasClass('active')) {
+          self.model.removeGrasp(node);
+          $(this).removeClass('active');
+        } else {
+          self.model.addGrasp(node);
+          $(this).addClass('active');
+        }
+      });
 
-    $('#nodes').on('click', '.remove', function() {
-      self.model.removeNode($(this).parent()[0].node);
-    }).on('change', '.x, .y', function() {
-      var t = parseFloat($(this).val());
-      var attr = $(this).hasClass('x') ? 'x' : 'y';
-      var $parent = $(this).parent();
+    $('#nodes')
+      .on('click', '.remove', function () {
+        self.model.removeNode($(this).parent()[0].node);
+      })
+      .on('change', '.x, .y', function () {
+        var t = parseFloat($(this).val());
+        var attr = $(this).hasClass('x') ? 'x' : 'y';
+        var $parent = $(this).parent();
 
-      if (isNaN(t)) {
-        t = $parent[0].node[attr];
-      }
+        if (isNaN(t)) {
+          t = $parent[0].node[attr];
+        }
 
-      $(this).val(t);
+        $(this).val(t);
 
-      self.model.moveNode(
-				$parent[0].node,
-				$parent.children('.x').val(),
-				$parent.children('.y').val()
-			);
-    }).on('focus', '.x, .y', function() {
-      $(this).parent()[0].node.$node.addClass('active');
-    }).on('blur', '.x, .y', function() {
-      $(this).parent()[0].node.$node.removeClass('active')
-    });
+        self.model.moveNode(
+          $parent[0].node,
+          $parent.children('.x').val(),
+          $parent.children('.y').val()
+        );
+      })
+      .on('focus', '.x, .y', function () {
+        $(this).parent()[0].node.$node.addClass('active');
+      })
+      .on('blur', '.x, .y', function () {
+        $(this).parent()[0].node.$node.removeClass('active');
+      });
 
-    $('#add').click(function() {
+    $('#add').click(function () {
       self.model.appendNode();
       $('#nodes > :last-child .x').focus();
     });
 
-    $('#mu').change(function() {
-      var t = parseFloat($(this).val());
+    $('#mu')
+      .change(function () {
+        var t = parseFloat($(this).val());
 
-      if (isNaN(t)) {
-        t = self.model.getMu();
-      }
+        if (isNaN(t)) {
+          t = self.model.getMu();
+        }
 
-      $(this).val(t);
-      self.model.setMu(t);
-    }).val(mu).change();
+        $(this).val(t);
+        self.model.setMu(t);
+      })
+      .val(mu)
+      .change();
   };
 }
